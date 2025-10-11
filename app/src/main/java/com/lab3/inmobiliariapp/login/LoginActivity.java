@@ -35,20 +35,8 @@ public class LoginActivity extends AppCompatActivity {
             viewModel.login(email, password);
         });
 
-        viewModel.getIsLoggedIn().observe(this, isLoggedIn -> {
-            if (isLoggedIn) {
-                //Navegar al MainActivity
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();// Evita volver al login con el botón "Atrás"
-            }
-        });
-
-        viewModel.getErrorMessage().observe(this, message -> {
-            if (message != null && !message.isEmpty()) {
-                Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
-            }
-        });
+        viewModel.getMensaje().observe(this,
+                mensaje -> Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show());
 
     }
 }
