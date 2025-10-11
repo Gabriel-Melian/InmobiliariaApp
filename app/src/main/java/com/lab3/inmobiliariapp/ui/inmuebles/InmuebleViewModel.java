@@ -1,16 +1,16 @@
-package com.lab3.inmobiliariapp.ui.slideshow;
+package com.lab3.inmobiliariapp.ui.inmuebles;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SlideshowViewModel extends ViewModel {
+public class InmuebleViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public SlideshowViewModel() {
+    public InmuebleViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Slideshow fragment");
+        mText.setValue("Inmueble fragment");
     }
 
     public LiveData<String> getText() {

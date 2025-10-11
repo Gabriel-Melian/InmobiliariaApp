@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_perfil" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.lab3.inmobiliariapp.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_inmuebles"
+        android:name="com.lab3.inmobiliariapp.ui.inmuebles.InmuebleFragment"
+        android:label="@string/menu_inmuebles"
+        tools:layout="@layout/fragment_inmueble" />
 </navigation>
