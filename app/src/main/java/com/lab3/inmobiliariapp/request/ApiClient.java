@@ -27,8 +27,11 @@ public class ApiClient {
 
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(URLBASE)
-                .addConverterFactory(ScalarsConverterFactory.create())//Para recibir respuestas sin formato
+                .addConverterFactory(ScalarsConverterFactory.create())
+                //ConvertersScalars convierten la respuesta del servidor (String, int, boolean) de texto plano a objetos Java
+                //Aca es necesario porque el Login devuelve el Token en formato texto plano (String)
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                //ConvertersGson convierte la respuesta del servidor (JSON) en objetos Java
                 .build();
 
         return retrofit.create(InmoService.class);
