@@ -10,4 +10,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_perfil">Perfil</string>
     <string name="menu_inmuebles">Inmuebles</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="menu_contratos">Contratos</string>
+    <string name="menu_inquilinos">Inquilinos</string>
+    <string name="menu_logout">Logout</string>
 </resources>

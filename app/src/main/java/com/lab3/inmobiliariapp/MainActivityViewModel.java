@@ -1,6 +1,7 @@
 package com.lab3.inmobiliariapp;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -34,6 +35,7 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     private void cargarPropietario() {
         String token = ApiClient.leerToken(getApplication());
+        //Log.d("TOKEN_DEBUG", "Token actual: " + token);
         ApiClient.InmoService api = ApiClient.getApiInmobiliaria();
         Call<PropietarioModel> call = api.getPropietario("Bearer " + token);
 
