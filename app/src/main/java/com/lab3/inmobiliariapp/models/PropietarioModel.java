@@ -10,14 +10,17 @@ public class PropietarioModel {
     private String email;
     private String clave;
 
-    public PropietarioModel(int idPropietario, String nombre, String apellido, String dni, String telefono, String email, String clave) {
+    public PropietarioModel(int idPropietario, String nombre, String apellido, String dni, String telefono, String email) {
         this.idPropietario = idPropietario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.telefono = telefono;
         this.email = email;
-        this.clave = clave;
+    }
+
+    public PropietarioModel() {
+
     }
 
     public int getIdPropietario() {

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.lab3.inmobiliariapp.databinding.FragmentPerfilBinding;
+import com.lab3.inmobiliariapp.models.PropietarioModel;
 
 public class PerfilFragment extends Fragment {
 
@@ -26,7 +27,7 @@ public class PerfilFragment extends Fragment {
         binding = FragmentPerfilBinding.inflate(inflater, container, false);
         vm = new ViewModelProvider(this).get(PerfilViewModel.class);
 
-        //Primero bbserva el mensaje del ViewModel (para mostrar errores o notificaciones)
+        //Primero observa el mensaje del ViewModel (para mostrar errores o notificaciones)
         vm.getMensaje().observe(getViewLifecycleOwner(),
                 mensaje -> Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show());
 
@@ -37,7 +38,30 @@ public class PerfilFragment extends Fragment {
             binding.etDni.setText(String.valueOf(p.getDni()));
             binding.etTelefono.setText(p.getTelefono());
             binding.etEmail.setText(p.getEmail());
-            binding.etClave.setText(p.getClave());
+        });
+
+        // Observa cambios en modo edición
+        vm.getModoEdicion().observe(getViewLifecycleOwner(), enEdicion -> {
+            boolean editable = enEdicion != null && enEdicion;
+            binding.etNombre.setEnabled(editable);
+            binding.etApellido.setEnabled(editable);
+            binding.etDni.setEnabled(editable);
+            binding.etTelefono.setEnabled(editable);
+            binding.etEmail.setEnabled(editable);
+            binding.btnActualizar.setText(editable ? "Guardar" : "Editar");
+        });
+
+        //Btn principal de Editar/Guardar
+        binding.btnActualizar.setOnClickListener(v -> {
+            PropietarioModel propietario = new PropietarioModel(
+                    vm.getPropietario().getValue().getIdPropietario(),
+                    binding.etNombre.getText().toString(),
+                    binding.etApellido.getText().toString(),
+                    binding.etDni.getText().toString(),
+                    binding.etTelefono.getText().toString(),
+                    binding.etEmail.getText().toString()
+            );
+            vm.onBotonPresionado(propietario);
         });
 
         //Llama al metodo para cargar los datos
