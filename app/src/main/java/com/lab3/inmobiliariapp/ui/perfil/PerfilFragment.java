@@ -10,13 +10,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
+import com.lab3.inmobiliariapp.R;
 import com.lab3.inmobiliariapp.databinding.FragmentPerfilBinding;
 import com.lab3.inmobiliariapp.models.PropietarioModel;
 
 public class PerfilFragment extends Fragment {
 
     private FragmentPerfilBinding binding;
+    private ClaveFragmentViewModel vmClave;
     private PerfilViewModel vm;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,6 +52,12 @@ public class PerfilFragment extends Fragment {
             binding.etTelefono.setEnabled(editable);
             binding.etEmail.setEnabled(editable);
             binding.btnActualizar.setText(editable ? "Guardar" : "Editar");
+        });
+
+        //Btn Clave
+        binding.btnClave.setOnClickListener(v -> {
+            NavHostFragment.findNavController(this)
+                    .navigate(R.id.nav_cambiar_clave);
         });
 
         //Btn principal de Editar/Guardar

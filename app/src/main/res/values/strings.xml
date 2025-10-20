@@ -13,5 +13,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="menu_contratos">Contratos</string>
     <string name="menu_inquilinos">Inquilinos</string>
+    <string name="menu_clave">Modificar Clave</string>
     <string name="menu_logout">Logout</string>
 </resources>

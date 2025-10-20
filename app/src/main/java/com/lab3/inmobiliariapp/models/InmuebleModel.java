@@ -1,34 +1,48 @@
 package com.lab3.inmobiliariapp.models;
 
 public class InmuebleModel {
-    private int id;
+    private int idInmueble;
     private String direccion;
-    private String tipo;
     private String uso;
-    private int precio;
+    private String tipo;
     private int ambientes;
-    private boolean estado;
-    private String foto;
+    private int superficie;
+    private double latitud;
+    private double valor;
+    private String imagen;
+    private boolean disponible;
+    private double longitud;
     private int idPropietario;
+    private PropietarioModel duenio;
+    private boolean tieneContratoVigente;
 
-    public InmuebleModel(int id, String direccion, String tipo, String uso, int precio, int ambientes, boolean estado, String foto, int idPropietario) {
-        this.id = id;
+    public InmuebleModel(int idInmueble, String direccion, String uso, String tipo, int ambientes, int superficie, double latitud, double valor, String imagen, boolean disponible, double longitud, int idPropietario, PropietarioModel duenio, boolean tieneContratoVigente) {
+        this.idInmueble = idInmueble;
         this.direccion = direccion;
-        this.tipo = tipo;
         this.uso = uso;
-        this.precio = precio;
+        this.tipo = tipo;
         this.ambientes = ambientes;
-        this.estado = estado;
-        this.foto = foto;
+        this.superficie = superficie;
+        this.latitud = latitud;
+        this.valor = valor;
+        this.imagen = imagen;
+        this.disponible = disponible;
+        this.longitud = longitud;
         this.idPropietario = idPropietario;
+        this.duenio = duenio;
+        this.tieneContratoVigente = tieneContratoVigente;
     }
 
-    public int getId() {
-        return id;
+    public InmuebleModel() {
+
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getIdInmueble() {
+        return idInmueble;
+    }
+
+    public void setIdInmueble(int idInmueble) {
+        this.idInmueble = idInmueble;
     }
 
     public String getDireccion() {
@@ -39,14 +53,6 @@ public class InmuebleModel {
         this.direccion = direccion;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     public String getUso() {
         return uso;
     }
@@ -55,12 +61,12 @@ public class InmuebleModel {
         this.uso = uso;
     }
 
-    public int getPrecio() {
-        return precio;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setPrecio(int precio) {
-        this.precio = precio;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public int getAmbientes() {
@@ -71,20 +77,52 @@ public class InmuebleModel {
         this.ambientes = ambientes;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public int getSuperficie() {
+        return superficie;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setSuperficie(int superficie) {
+        this.superficie = superficie;
     }
 
-    public String getFoto() {
-        return foto;
+    public double getLatitud() {
+        return latitud;
     }
 
-    public void setFoto(String foto) {
-        this.foto = foto;
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
     }
 
     public int getIdPropietario() {
@@ -94,4 +132,21 @@ public class InmuebleModel {
     public void setIdPropietario(int idPropietario) {
         this.idPropietario = idPropietario;
     }
+
+    public PropietarioModel getDuenio() {
+        return duenio;
+    }
+
+    public void setDuenio(PropietarioModel duenio) {
+        this.duenio = duenio;
+    }
+
+    public boolean isTieneContratoVigente() {
+        return tieneContratoVigente;
+    }
+
+    public void setTieneContratoVigente(boolean tieneContratoVigente) {
+        this.tieneContratoVigente = tieneContratoVigente;
+    }
+
 }
