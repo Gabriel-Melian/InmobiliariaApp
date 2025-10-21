@@ -50,6 +50,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-maps:18.1.0")
     implementation(libs.glide)
     implementation(libs.legacy.support.v4)
+    implementation(libs.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

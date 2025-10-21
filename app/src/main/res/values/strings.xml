@@ -15,4 +15,8 @@
     <string name="menu_inquilinos">Inquilinos</string>
     <string name="menu_clave">Modificar Clave</string>
     <string name="menu_logout">Logout</string>
+    <!-- Recycler View de Inmueble, Adapter y Card -->
+    <string name="direccion">Dirección</string>
+    <string name="tipo">Tipo</string>
+    <string name="precio">Precio</string>
 </resources>

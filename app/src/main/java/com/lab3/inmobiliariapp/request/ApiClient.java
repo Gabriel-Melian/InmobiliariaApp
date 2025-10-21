@@ -24,7 +24,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
 public class ApiClient {
-    private static  String URLBASE = "https://inmobiliariaulp-amb5hwfqaraweyga.canadacentral-01.azurewebsites.net/";
+    public final static  String URLBASE = "https://inmobiliariaulp-amb5hwfqaraweyga.canadacentral-01.azurewebsites.net/";
 
     public static InmoService getApiInmobiliaria(){
         Gson gson = new GsonBuilder().create();
@@ -60,6 +60,9 @@ public class ApiClient {
         Call<Void> changePassword(@Header("Authorization") String token,
                                   @Field("currentPassword") String currentPassword,
                                   @Field("newPassword") String newPassword);
+
+        @PUT("api/Inmuebles/actualizar")
+        Call<InmuebleModel> actualizarInmueble(@Header("Authorization") String token, @Body InmuebleModel inmueble);
 
 
 

@@ -1,6 +1,8 @@
 package com.lab3.inmobiliariapp.models;
 
-public class InmuebleModel {
+import java.io.Serializable;
+
+public class InmuebleModel implements Serializable {
     private int idInmueble;
     private String direccion;
     private String uso;

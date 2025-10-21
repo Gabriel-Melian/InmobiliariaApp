@@ -21,13 +21,21 @@
         android:id="@+id/nav_inmuebles"
         android:name="com.lab3.inmobiliariapp.ui.inmuebles.InmuebleFragment"
         android:label="@string/menu_inmuebles"
-        tools:layout="@layout/fragment_inmueble" />
+        tools:layout="@layout/fragment_inmueble" >
+        <action
+            android:id="@+id/action_nav_inmuebles_to_detalleInmuebleFragment"
+            app:destination="@id/detalleInmuebleFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_inquilinos"
         android:name="com.lab3.inmobiliariapp.ui.inquilinos.InquilinoFragment"
         android:label="Inquilinos"
-        tools:layout="@layout/fragment_inquilino" />
+        tools:layout="@layout/fragment_inquilino" >
+        <action
+            android:id="@+id/action_nav_inquilinos_self"
+            app:destination="@id/nav_inquilinos" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_contratos"
@@ -46,4 +54,13 @@
         android:name="com.lab3.inmobiliariapp.ui.logout.LogoutFragment"
         android:label="Logout"
         tools:layout="@layout/fragment_logout" />
+    <fragment
+        android:id="@+id/detalleInmuebleFragment"
+        android:name="com.lab3.inmobiliariapp.ui.inmuebles.DetalleInmuebleFragment"
+        android:label="Detalle de Inmueble"
+        tools:layout="@layout/fragment_detalle_inmueble" >
+        <action
+            android:id="@+id/action_detalleInmuebleFragment_to_nav_inmuebles2"
+            app:destination="@id/nav_inmuebles" />
+    </fragment>
 </navigation>

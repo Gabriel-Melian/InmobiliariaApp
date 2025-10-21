@@ -25,7 +25,7 @@ public class InmuebleViewModel extends AndroidViewModel {
 
     public InmuebleViewModel(@NonNull Application application) {
         super(application);
-        leerInmuebles();
+        leerInmuebles();//Lo llamo aca directamente, en el contructor
     }
 
     public LiveData<String> getmText() {//TODO ESTO HAY QUE PROBARLO!!!
@@ -49,7 +49,7 @@ public class InmuebleViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<List<InmuebleModel>> call, Response<List<InmuebleModel>> response) {
                 if (response.isSuccessful()){
-                    mInmueble.postValue(response.body());
+                    mInmueble.postValue(response.body());//Uso postValue porque es un metodo async (un Callback)
                 } else {
                     Toast.makeText(getApplication(), "No hay inmuebles disponibles: "+response.message(), Toast.LENGTH_SHORT).show();
                 }
