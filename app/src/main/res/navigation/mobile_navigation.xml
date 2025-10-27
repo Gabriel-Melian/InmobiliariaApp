@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_nav_inmuebles_to_detalleInmuebleFragment"
             app:destination="@id/detalleInmuebleFragment" />
+        <action
+            android:id="@+id/action_nav_inmuebles_to_cargarInmuebleFragment"
+            app:destination="@id/cargarInmuebleFragment" />
     </fragment>
 
     <fragment
@@ -61,6 +64,16 @@
         tools:layout="@layout/fragment_detalle_inmueble" >
         <action
             android:id="@+id/action_detalleInmuebleFragment_to_nav_inmuebles2"
+            app:destination="@id/nav_inmuebles" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cargarInmuebleFragment"
+        android:name="com.lab3.inmobiliariapp.ui.inmuebles.CargarInmuebleFragment"
+        android:label="Cargar Inmueble"
+        tools:layout="@layout/fragment_cargar_inmueble" >
+        <action
+            android:id="@+id/action_cargarInmuebleFragment_to_nav_inmuebles"
             app:destination="@id/nav_inmuebles" />
     </fragment>
 </navigation>
