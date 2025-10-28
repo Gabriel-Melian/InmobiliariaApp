@@ -49,7 +49,9 @@ public class PerfilViewModel extends AndroidViewModel {
         Boolean enEdicion = modoEdicion.getValue();
         if (enEdicion != null && enEdicion) {
             //Si estaba editando, guarda los cambios
-            actualizarPropietario(actual);
+            if (validarCampos(actual)) {
+                actualizarPropietario(actual);
+            }
         } else {
             //Si estaba en modo lectura, pasa a edición
             cambiarModoEdicion();
@@ -139,5 +141,29 @@ public class PerfilViewModel extends AndroidViewModel {
                 mensaje.postValue("Error al contactar con el servidor.");
             }
         });
+    }
+
+    private boolean validarCampos(PropietarioModel p) {
+        if (p.getNombre().isEmpty() || p.getApellido().isEmpty() ||
+                p.getDni().isEmpty() || p.getTelefono().isEmpty() || p.getEmail().isEmpty()) {
+            mensaje.postValue("Todos los campos son obligatorios.");
+            return false;
+        }
+
+        //Validar numeros en DNI
+        try {
+            Integer.parseInt(p.getDni());
+        } catch (NumberFormatException e) {
+            mensaje.postValue("El DNI debe ser un número válido.");
+            return false;
+        }
+
+        //Formato Email
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(p.getEmail()).matches()) {
+            mensaje.postValue("Ingrese un correo electrónico válido.");
+            return false;
+        }
+
+        return true;
     }
 }

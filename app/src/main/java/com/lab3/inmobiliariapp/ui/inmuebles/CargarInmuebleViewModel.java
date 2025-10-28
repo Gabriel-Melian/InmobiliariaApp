@@ -59,6 +59,28 @@ public class CargarInmuebleViewModel extends AndroidViewModel {
         int superficiePars, ambientesPars;
         double precio;
 
+        //Validar campos
+        if (direccion.isEmpty() || tipo.isEmpty() || uso.isEmpty() || ambientes.isEmpty() || superficie.isEmpty() || valor.isEmpty()) {
+            Toast.makeText(getApplication(), "Debe ingresar todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //Img seleccionada
+        if (mUri.getValue() == null) {
+            Toast.makeText(getApplication(), "Debe seleccionar una foto", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //Validar formato de numeros
+        try {
+            precio = Double.parseDouble(valor);
+            superficiePars = Integer.parseInt(superficie);
+            ambientesPars = Integer.parseInt(ambientes);
+        } catch (NumberFormatException nfe) {
+            Toast.makeText(getApplication(), "Debe ingresar números válidos en los campos de valor, superficie y ambientes", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         try{
             precio = Double.parseDouble(valor);
             superficiePars = Integer.parseInt(superficie);
