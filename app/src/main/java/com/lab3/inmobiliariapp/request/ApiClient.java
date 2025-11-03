@@ -6,7 +6,9 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import com.lab3.inmobiliariapp.models.Contrato;
 import com.lab3.inmobiliariapp.models.InmuebleModel;
+import com.lab3.inmobiliariapp.models.Pago;
 import com.lab3.inmobiliariapp.models.PropietarioModel;
 
 import java.util.List;
@@ -26,6 +28,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public class ApiClient {
     public final static  String URLBASE = "https://inmobiliariaulp-amb5hwfqaraweyga.canadacentral-01.azurewebsites.net/";
@@ -76,8 +79,24 @@ public class ApiClient {
                 @Part("inmueble") RequestBody inmueble
         );
 
+        //Devuelve lista de contratos en base al id de un inmueble
+        @GET("api/Contratos/inmueble/{id}")
+        Call<List<Contrato>> obtenerContratosPorInmuebleId(
+                @Header("Authorization") String token,
+                @Path("id") int idInmueble
+        );
 
+        //Devuelve los inmuebles con contrato vigente
+        @GET("api/Inmuebles/GetContratoVigente")
+        Call<List<InmuebleModel>> obtenerInmueblesConContratoVigente(
+                @Header("Authorization") String token
+        );
 
+        @GET("api/Pagos/contrato/{id}")
+        Call<List<Pago>> obtenerPagosPorContrato(
+                @Header("Authorization") String token,
+                @Path("id") int idContrato
+        );
     }
 
     public static void guardarToken(Context context, String token) {
