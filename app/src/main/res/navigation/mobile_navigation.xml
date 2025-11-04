@@ -44,7 +44,11 @@
         android:id="@+id/nav_contratos"
         android:name="com.lab3.inmobiliariapp.ui.contratos.ContratoFragment"
         android:label="Contratos vigentes"
-        tools:layout="@layout/fragment_contrato" />
+        tools:layout="@layout/fragment_contrato" >
+        <action
+            android:id="@+id/action_nav_contratos_to_detalleContratoFragment"
+            app:destination="@id/detalleContratoFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_cambiar_clave"
@@ -75,5 +79,46 @@
         <action
             android:id="@+id/action_cargarInmuebleFragment_to_nav_inmuebles"
             app:destination="@id/nav_inmuebles" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detalleContratoFragment"
+        android:name="com.lab3.inmobiliariapp.ui.contratos.DetalleContratoFragment"
+        android:label="Detalle de Contrato"
+        tools:layout="@layout/fragment_detalle_contrato" >
+        <!-- Accion para volver al listado de contratos -->
+        <action
+            android:id="@+id/action_detalleContratoFragment_to_nav_contratos"
+            app:destination="@id/nav_contratos" />
+
+        <!-- Ir a pagos -->
+        <action
+            android:id="@+id/action_detalleContratoFragment_to_nav_pagos"
+            app:destination="@id/nav_pagos" />
+
+        <!-- Ir a inquilino -->
+        <action
+            android:id="@+id/action_detalleContratoFragment_to_nav_inquilino_detalle"
+            app:destination="@id/nav_inquilino_detalle" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_pagos"
+        android:name="com.lab3.inmobiliariapp.ui.pagos.PagoFragment"
+        android:label="Pagos"
+        tools:layout="@layout/fragment_pago" >
+        <action
+            android:id="@+id/action_nav_pagos_to_detalleContratoFragment2"
+            app:destination="@id/detalleContratoFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_inquilino_detalle"
+        android:name="com.lab3.inmobiliariapp.ui.inquilinos.InquilinoFragment"
+        android:label="Detalle del Inquilino"
+        tools:layout="@layout/fragment_inquilino" >
+        <action
+            android:id="@+id/action_nav_inquilino_detalle_to_detalleContratoFragment"
+            app:destination="@id/detalleContratoFragment" />
     </fragment>
 </navigation>

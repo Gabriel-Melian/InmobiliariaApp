@@ -51,11 +51,11 @@ public class ContratoAdapter extends RecyclerView.Adapter<ContratoAdapter.Contra
                 .into(holder.imgInmueble);
 
         //Boton o click en la card: Abre el detalle del contrato del inmueble
-//        holder.itemView.setOnClickListener(v -> {
-//            Bundle bundle = new Bundle();
-//            bundle.putInt("idInmueble", i.getIdInmueble());
-//            Navigation.findNavController(v).navigate(R.id.detalleContratoFragment, bundle);
-//        });
+        holder.itemView.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt("idInmueble", i.getIdInmueble());
+            Navigation.findNavController(v).navigate(R.id.detalleContratoFragment, bundle);
+        });
     }
 
     @Override

@@ -1,7 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.contratos.DetalleContratoFragment" />
+    android:padding="16dp"
+    tools:context=".ui.contratos.DetalleContratoFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:background="@color/white"
+        android:elevation="4dp"
+        android:layout_margin="12dp">
+
+        <TextView
+            android:id="@+id/tvDireccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dirección:"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvFechas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inicio: - / Fin: -"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvInquilino"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inquilino:"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvMonto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Monto:"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvEstado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estado:"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnVerPagos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver Pagos"
+            android:backgroundTint="@color/teal_700"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnVerInquilino"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver Inquilino"
+            android:backgroundTint="@color/teal_700"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</ScrollView>

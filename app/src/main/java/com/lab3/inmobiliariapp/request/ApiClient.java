@@ -81,7 +81,7 @@ public class ApiClient {
 
         //Devuelve lista de contratos en base al id de un inmueble
         @GET("api/Contratos/inmueble/{id}")
-        Call<List<Contrato>> obtenerContratosPorInmuebleId(
+        Call<Contrato> obtenerContratoPorInmuebleId(
                 @Header("Authorization") String token,
                 @Path("id") int idInmueble
         );
