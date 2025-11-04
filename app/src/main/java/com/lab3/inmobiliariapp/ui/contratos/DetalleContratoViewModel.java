@@ -20,8 +20,6 @@ import retrofit2.Response;
 public class DetalleContratoViewModel extends AndroidViewModel {
 
     private MutableLiveData<Contrato> contrato = new MutableLiveData<>();
-    private MutableLiveData<Bundle> irAPagos = new MutableLiveData<>();
-    private MutableLiveData<Bundle> irAInquilino = new MutableLiveData<>();
     private Application app;
     public DetalleContratoViewModel(@NonNull Application application) {
         super(application);
@@ -30,14 +28,6 @@ public class DetalleContratoViewModel extends AndroidViewModel {
 
     public LiveData<Contrato> getContrato() {
         return contrato;
-    }
-
-    public LiveData<Bundle> getNavegarAPagos() {
-        return irAPagos;
-    }
-
-    public LiveData<Bundle> getNavegarAInquilino() {
-        return irAInquilino;
     }
 
     public void recibirArgumentos(Bundle args) {
@@ -62,7 +52,19 @@ public class DetalleContratoViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<Contrato> call, Response<Contrato> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    contrato.postValue(response.body());
+                    Contrato c = response.body();
+                    //Verificaciones
+                    if (c.getInmueble() != null && (c.getInmueble().getDireccion() == null || c.getInmueble().getDireccion().isEmpty())) {
+                        c.getInmueble().setDireccion("Sin dirección");
+                    }
+                    if (c.getInquilino() != null) {
+                        if (c.getInquilino().getNombre() == null) c.getInquilino().setNombre("-");
+                        if (c.getInquilino().getApellido() == null) c.getInquilino().setApellido("-");
+                    }
+                    if (c.getFechaInicio() == null) c.setFechaInicio("-");
+                    if (c.getFechaFinalizacion() == null) c.setFechaFinalizacion("-");
+                    //Post al contrato listo para mostrar
+                    contrato.postValue(c);
                 } else {
                     Toast.makeText(app, "Contrato no encontrado para ese inmueble", Toast.LENGTH_SHORT).show();
                 }
@@ -76,62 +78,37 @@ public class DetalleContratoViewModel extends AndroidViewModel {
     }
 
     //Formatear textos (el fragment solo invoca el LiveData del contrato y estos helpers)
-    public String formatoDireccion() {
+    //Metodos auxiliares para mostrar los datos
+    public String obtenerDireccion() {
         Contrato c = contrato.getValue();
-        return "Dirección: " + ((c != null && c.getInmueble() != null)
-                ? c.getInmueble().getDireccion()
-                : "-");
+        return (c != null && c.getInmueble() != null) ? c.getInmueble().getDireccion() : "-";
     }
 
-    public String formatoFechas() {
+    public String obtenerFechas() {
         Contrato c = contrato.getValue();
-        return "Inicio: " + (c != null && c.getFechaInicio() != null ? c.getFechaInicio() : "-")
-                + "  |  Fin: " + (c != null && c.getFechaFinalizacion() != null ? c.getFechaFinalizacion() : "-");
+        if (c == null) return "Inicio: - | Fin: -";
+        return "Inicio: " + c.getFechaInicio() + " | Fin: " + c.getFechaFinalizacion();
     }
 
-    public String formatoInquilino() {
+    public String obtenerInquilino() {
         Contrato c = contrato.getValue();
-        return "Inquilino: " + ((c != null && c.getInquilino() != null)
-                ? c.getInquilino().getNombre() + " " + c.getInquilino().getApellido()
-                : "-");
+        if (c == null || c.getInquilino() == null) return "Inquilino: -";
+        return c.getInquilino().getNombre() + " " + c.getInquilino().getApellido();
     }
 
-    public String formatoMonto() {
+    public String obtenerMonto() {
         Contrato c = contrato.getValue();
-        return "Monto: " + ((c != null)
-                ? "$" + c.getMontoAlquiler()
-                : "-");
+        return (c != null) ? "$" + c.getMontoAlquiler() : "-";
     }
 
-    public String formatoEstado() {
+    public String obtenerEstado() {
         Contrato c = contrato.getValue();
-        return "Estado: " + ((c != null)
-                ? (c.isEstado() ? "Activo" : "Inactivo")
-                : "-");
+        if (c == null) return "-";
+        return c.isEstado() ? "Activo" : "Inactivo";
     }
 
-    // Estos métodos serán llamados desde el Fragment (sin lógica allí)
-    // El ViewModel decide si hay contrato y arma el Bundle para navegación
-    public void onVerPagosClicked() {
-        Contrato c = contrato.getValue();
-        if (c == null) {
-            Toast.makeText(app, "No hay contrato cargado para mostrar los pagos", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Bundle b = new Bundle();
-        b.putInt("idContrato", c.getIdContrato());
-        irAPagos.postValue(b);
-    }
+    // Estos métodos serán llamados desde el Fragment
+    // El ViewModel decide si hay contrato y arma el Bundle para navegation
 
-    public void onVerInquilinoClicked() {
-        Contrato c = contrato.getValue();
-        if (c == null || c.getInquilino() == null) {
-            Toast.makeText(app, "No hay inquilino disponible para este contrato", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Bundle b = new Bundle();
-        b.putSerializable("inquilino", c.getInquilino());//Mandar al inquilino completo
-        irAInquilino.postValue(b);
-    }
 
 }
