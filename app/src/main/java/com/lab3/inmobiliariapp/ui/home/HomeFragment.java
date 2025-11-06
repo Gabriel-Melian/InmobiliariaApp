@@ -21,22 +21,25 @@ import com.lab3.inmobiliariapp.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
     private FragmentHomeBinding binding;
+    private HomeViewModel vm;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        vm = new ViewModelProvider(this).get(HomeViewModel.class);
 
-        //Inicializar el mapa
+        //Configurar mapa y delegar logica al vm
         SupportMapFragment mapFragment = (SupportMapFragment)
                 getChildFragmentManager().findFragmentById(R.id.map);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
-        }
+        mapFragment.getMapAsync(this);
 
-        return root;
+        //Observer del liveData del vm
+        vm.getMapa().observe(getViewLifecycleOwner(), map -> {
+
+        });
+
+        return binding.getRoot();
     }
 
     @Override
@@ -46,15 +49,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        //Coordenadas hardcodeadas San Luis
-        LatLng ubicacion = new LatLng(-33.301726, -66.337752);
-        mMap.addMarker(new MarkerOptions()
-                .position(ubicacion)
-                .title("Inmobiliaria Melian")
-                .snippet("Sucursal Zona Centro"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ubicacion, 15));
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        vm.setMapa(googleMap);//Pasar el mapa al vm
     }
 }

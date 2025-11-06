@@ -13,7 +13,10 @@ import androidx.lifecycle.ViewModel;
 import com.lab3.inmobiliariapp.models.Pago;
 import com.lab3.inmobiliariapp.request.ApiClient;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,13 +64,35 @@ public class PagoViewModel extends AndroidViewModel {
         call.enqueue(new Callback<List<Pago>>() {
             @Override
             public void onResponse(Call<List<Pago>> call, Response<List<Pago>> response) {
+                //Asi estaba antes
+//                if (response.isSuccessful() && response.body() != null) {
+//                    pagos.postValue(response.body());
+//                    if (response.body().isEmpty()) {
+//                        mensaje.postValue("No hay pagos registrados para este contrato.");
+//                    } else {
+//                        mensaje.postValue("");//No muestra nada si todo sale bien
+//                    }
+//                } else {
+//                    mensaje.postValue("Error al obtener los pagos del contrato.");
+//                }
                 if (response.isSuccessful() && response.body() != null) {
-                    pagos.postValue(response.body());
-                    if (response.body().isEmpty()) {
-                        mensaje.postValue("No hay pagos registrados para este contrato.");
-                    } else {
-                        mensaje.postValue("");//No muestra nada si todo sale bien
+                    List<Pago> lista = response.body();
+
+                    //Formatear fechas antes de post
+                    SimpleDateFormat entrada = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    SimpleDateFormat salida = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+                    for (Pago p : lista) {
+                        try {
+                            Date fecha = entrada.parse(p.getFechaPago());
+                            p.setFechaPago(salida.format(fecha));
+                        } catch (Exception e) {
+                            Toast.makeText(app, "Error al formatear fecha: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
+
+                    pagos.postValue(lista);
+                    mensaje.postValue(lista.isEmpty() ? "No hay pagos registrados para este contrato." : "");
                 } else {
                     mensaje.postValue("Error al obtener los pagos del contrato.");
                 }

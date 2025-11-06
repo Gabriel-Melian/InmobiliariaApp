@@ -13,6 +13,11 @@ import androidx.lifecycle.ViewModel;
 import com.lab3.inmobiliariapp.models.Contrato;
 import com.lab3.inmobiliariapp.request.ApiClient;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -87,7 +92,11 @@ public class DetalleContratoViewModel extends AndroidViewModel {
     public String obtenerFechas() {
         Contrato c = contrato.getValue();
         if (c == null) return "Inicio: - | Fin: -";
-        return "Inicio: " + c.getFechaInicio() + " | Fin: " + c.getFechaFinalizacion();
+        //Parseo fechas
+        String inicio = formatearFecha(c.getFechaInicio());
+        String fin = formatearFecha(c.getFechaFinalizacion());
+
+        return "Inicio: " + inicio + " | Fin: " + fin;
     }
 
     public String obtenerInquilino() {
@@ -105,6 +114,21 @@ public class DetalleContratoViewModel extends AndroidViewModel {
         Contrato c = contrato.getValue();
         if (c == null) return "-";
         return c.isEstado() ? "Activo" : "Inactivo";
+    }
+
+    private String formatearFecha(String fechaOriginal) {
+        if (fechaOriginal == null || fechaOriginal.equals("-")) return "-";
+        try {
+            //Detecta formato original (aaaa/mm/dd)
+            SimpleDateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            Date date = formatoEntrada.parse(fechaOriginal);
+
+            //Retorna en formato dd/mm/aaaa
+            SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            return formatoSalida.format(date);
+        } catch (ParseException e) {
+            return fechaOriginal;//Si por alguna razon no puede parsear, muestra la fecha comun
+        }
     }
 
     // Estos métodos serán llamados desde el Fragment

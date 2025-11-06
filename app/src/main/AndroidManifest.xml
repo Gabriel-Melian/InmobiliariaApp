@@ -56,6 +56,7 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.InmobiliariaApp.NoActionBar">
         </activity>
+
     </application>
 
 </manifest>
